@@ -1,0 +1,109 @@
+<html><head>
+        <meta charset="utf-8">
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <script type="text/javascript" src="js/jquery-3.1.1.min.js"></script>
+        <script type="text/javascript" src="js/bootstrap.min.js"></script>
+        <link href="css/style.css" rel="stylesheet" type="text/css">
+        <link href="css/checkbox.css" rel='stylesheet' type="text/css">
+        <script type="text/javascript" src="js/datajs.js"></script>
+        <title>Редактирование брендов</title>
+        <script>
+            $(document).ready(function() {
+                $("#addcategory").click(function() {
+                    maxIdCategory++;
+                    obj = new Section(maxIdCategory,
+                                    $("#categorynewname").val(),
+                                    $("#categorynewsort").val(),
+                                    $("#categorystatus").is(":checked"));
+                    datacategeory.push(obj);
+                    $("#listsection").append(getCategories(obj));
+                });
+                $("#listsection").click(function(e){
+                    if(!$(e.target).hasClass("mydelete")) return true;
+                    delcontainer = $(e.target).parents("div.container");
+                    id = parseInt(delcontainer.attr("data-id"));
+                    for (index in datacategeory){
+                        if (datacategeory[index].id === id){
+                            delete datacategeory[index];
+                        }
+                    }
+                    delcontainer.fadeOut("slow", function(){
+                        this.remove()
+                    })
+                })
+                for (index in datacategeory) {
+                    obj = datacategeory[index];
+                    $("#listsection").append(getCategories(obj));
+                }
+                
+            })
+        </script>
+    </head>
+    <body>
+        <div class="section">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+                        <ul class="nav nav-pills">
+                            <li>
+                                <a href="#">Дополнительные справочники</a>
+                            </li>
+                            <li>
+                                <a href="#">Секции категорий</a>
+                            </li>
+                            <li>
+                                <a href="#">Бренды</a>
+                            </li>
+                            <li class="active">
+                                <a href="#">Категории</a>
+                            </li>
+                            <li>
+                                <a href="#">Товары</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+                    <div class="tab-pane" id="section5">
+                        <div id="listsection"></div>
+                        <hr>
+                        <div class="section">
+                            <div class="container">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <form class="form-horizontal" role="form">
+                                            <div class="form-group">
+                                                <div class="col-sm-2">
+                                                    <input type="text" class="form-control" placeholder="id" disabled="">
+                                                </div>
+                                                <div class="col-sm-5">
+                                                    <input id="categorynewname"type="text" class="form-control" placeholder="Название категории">
+                                                </div>
+                                                <div class="col-sm-1">
+                                                    <input id="categorynewsort" type="text" class="form-control" placeholder="Сортировка">
+                                                </div>
+                                                <div class="col-sm-2">
+                                                    <div class="material-switch pull-right">
+                                                        <input id="categorystatus" name="someSwitchOption001" type="checkbox"/>
+                                                        <label for="categorystatus" class="label-success"></label>
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-1">
+                                                    <a id="addcategory"class="btn btn-block btn-success">V</a>
+                                                </div>
+                                                <div class="col-sm-1"></div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+    </body></html>
